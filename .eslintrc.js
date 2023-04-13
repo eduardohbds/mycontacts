@@ -16,5 +16,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'consistent-return': 'off',
     'prefer-const': 'off',
+    camelcase: 'off',
   },
 };

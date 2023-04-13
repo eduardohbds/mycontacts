@@ -34,6 +34,53 @@ class ContactRepository {
     });
   }
 
+  findByEmail(email) {
+    return new Promise((resolve) => {
+      resolve((contact) => contact.email === email);
+    });
+  }
+
+  create({
+    name,
+    email,
+    phone,
+    category_id,
+  }) {
+    return new Promise((resolve) => {
+      const newContact = {
+        name,
+        email,
+        phone,
+        category_id,
+      };
+
+      contacts.push(newContact);
+      resolve(newContact);
+    });
+  }
+
+  update(id, {
+    name,
+    email,
+    phone,
+    category_id,
+  }) {
+    return new Promise((resolve) => {
+      const updateContact = {
+        name,
+        email,
+        phone,
+        category_id,
+      };
+
+      contacts = contacts.map(
+        (contact) => (contact.id === id ? updateContact : contact),
+      );
+
+      resolve(updateContact);
+    });
+  }
+
   delete(id) {
     return new Promise((resolve) => {
       contacts = contacts.filter((contact) => contact.id !== id);
