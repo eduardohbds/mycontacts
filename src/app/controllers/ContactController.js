@@ -2,7 +2,8 @@ const ContactRepository = require("../repository/ContactRepository");
 
 class ContactController {
   async index(request, response) {
-    const contacts = await ContactRepository.findAll();
+    const { orderBy } = request.query;
+    const contacts = await ContactRepository.findAll(orderBy);
     response.send(contacts);
   }
 
@@ -30,7 +31,7 @@ class ContactController {
     const emailAlreadyExist = await ContactRepository.findByEmail();
 
     if (emailAlreadyExist) {
-      return response.status(400).json({ error: 'Email already have been aken' });
+      return response.status(400).json({ error: 'Email already have been taken' });
     }
     const contact = await ContactRepository.create({
       name,
